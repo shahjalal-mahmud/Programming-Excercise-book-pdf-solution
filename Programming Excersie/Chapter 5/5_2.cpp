@@ -66,26 +66,14 @@ void vector ::display()
 }
 int main()
 {
-    // int size = 5;
-    //  cout << "Enter the size of the vector: ";
-    //  cin >> size;
-
     int element[5] = {10, 20, 30, 40, 50};
 
     vector v1;
     v1.create(5, element);
     v1.display();
 
-    // int index, value;
-    // cout << "Enter index and value: ";
-    // cin >> index >> value;
-
     v1.modify(2, 25);
     v1.display();
-
-    // int scalar;
-    // cout << "Enter a number: ";
-    // cin >> scalar;
 
     v1.multiple(2);
     v1.display();
