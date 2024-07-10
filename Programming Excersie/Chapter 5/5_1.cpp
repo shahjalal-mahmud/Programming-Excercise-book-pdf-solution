@@ -19,7 +19,8 @@ Write a main program to test the program
 #include <string>
 using namespace std;
 
-class BankAccount {
+class BankAccount
+{
 private:
     string name;
     int accountNumber;
@@ -27,20 +28,24 @@ private:
     int balance;
 
 public:
-    void setValues(string name, int accountNumber, string accountType, int balance);
+    BankAccount(string name, int accountNumber, string accountType, int balance); // Constructor
     void deposit();
     void withdraw();
     void display() const;
+    ~BankAccount(); // Destructor
 };
 
-void BankAccount::setValues(string name, int accountNumber, string accountType, int balance) {
+BankAccount::BankAccount(string name, int accountNumber, string accountType, int balance)
+{
     this->name = name;
     this->accountNumber = accountNumber;
     this->accountType = accountType;
     this->balance = balance;
+    cout << "Account for " << name << " created successfully." << endl;
 }
 
-void BankAccount::deposit() {
+void BankAccount::deposit()
+{
     int amount;
     cout << "Enter deposit amount: ";
     cin >> amount;
@@ -48,26 +53,37 @@ void BankAccount::deposit() {
     cout << "New balance: " << balance << endl;
 }
 
-void BankAccount::withdraw() {
+void BankAccount::withdraw()
+{
     int amount;
     cout << "Enter withdraw amount: ";
     cin >> amount;
-    if (amount > balance) {
+    if (amount > balance)
+    {
         cout << "Insufficient Balance." << endl;
-    } else {
+    }
+    else
+    {
         balance -= amount;
         cout << "New balance: " << balance << endl;
     }
 }
 
-void BankAccount::display() const {
+void BankAccount::display() const
+{
     cout << "Name: " << name << endl
          << "Account Number: " << accountNumber << endl
          << "Account Type: " << accountType << endl
          << "Balance: " << balance << endl;
 }
 
-int main() {
+BankAccount::~BankAccount()
+{
+    cout << "Account for " << name << " with account number " << accountNumber << " is being deleted." << endl;
+}
+
+int main()
+{
     string name;
     int accountNumber;
     string accountType;
@@ -78,16 +94,17 @@ int main() {
 
     cout << "Enter account number: ";
     cin >> accountNumber;
-    cin.ignore();  
+    cin.ignore();
 
     cout << "Enter account type: ";
     getline(cin, accountType);
 
-    BankAccount account;
-    account.setValues(name, accountNumber, accountType, balance);
+    // Creating an object of BankAccount using the constructor
+    BankAccount account(name, accountNumber, accountType, balance);
     account.display();
     account.deposit();
     account.withdraw();
     account.display();
+
     return 0;
 }
