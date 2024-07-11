@@ -1,6 +1,11 @@
 /*
-6.5: Modify the program of exercise 6.4 to demonstrate 
-the use of pointer to access the members.
+6.4: Improve the system design in Exercise 6.3 to incorporate the following features:
+    (a) The price of the books should be updated as and when required. 
+    Use a private member function to implement this.
+    (b) The stock value of each book should be automatically updated as soon as 
+    a transaction is completed.
+    (c) The number of successful and unsuccessful transactions should be recorded for the
+    purpose of statistical analysis. Use static data members to keep count of transactions.
 */
 
 #include <iostream>
@@ -96,11 +101,11 @@ void searchBook(Book* books[], int size, const string& title, const string& auth
 }
 
 int main() {
-    // Creating inventory using pointers
+    // Creating inventory
     Book* inventory[] = {
-        new Book("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", "Bloomsbury", 20.5, 10),
-        new Book("J.R.R. Tolkien", "The Hobbit", "HarperCollins", 15.75, 5),
-        new Book("George Orwell", "1984", "Secker & Warburg", 13.25, 7),
+        new Book("J.K. Rowling", "Harry Potter and the Sorcerer's Stone", "Bloomsbury", 500, 110),
+        new Book("J.R.R. Tolkien", "The Hobbit", "HarperCollins", 700, 50),
+        new Book("George Orwell", "1984", "Secker & Warburg", 350, 15),
     };
     int size = sizeof(inventory) / sizeof(inventory[0]);
 
@@ -114,11 +119,10 @@ int main() {
     // Searching for the book in the inventory
     searchBook(inventory, size, title, author);
 
-    // Using a pointer to update price for the first book
-    Book* bookPtr = inventory[0];
-    bookPtr->changePrice(22.0);
+    // Update price for a book
+    inventory[0]->changePrice(22.0);
     cout << "Updated price of the first book:\n";
-    bookPtr->displayDetails();
+    inventory[0]->displayDetails();
 
     // Display transaction statistics
     cout << "Successful transactions: " << Book::getSuccessfulTransactions() << endl;
